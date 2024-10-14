@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import AddItem from './components/AddItem';
-import DisplayItems from './components/DisplayItems';
 import RemoveItem from './components/RemoveItem';
 import UpdateItem from './components/UpdateItem';
 import SearchItem from './components/SearchItem';
 import DisplayLowStockItems from './components/DisplayLowStockItems';
+import SortItems from './components/SortItems';
+import DisplayItems from './components/DisplayItems'
 
 const App = () => {
   const [inventory, setInventory] = useState([]);
@@ -40,8 +41,14 @@ const App = () => {
       {/* Remove item component */}
       <RemoveItem items={inventory} onRemoveItem={handleRemoveItem} />
 
-      {/* Display all items */}
+      {/* Sort items and display them */}
+      <SortItems items={inventory} />
+
+      {/* Display items with category filter */}
       <DisplayItems items={inventory} filterByCategory={true} />
+      
+      {/* Display all items without filtering */}
+      <DisplayItems items={inventory} filterByCategory={false} />
 
       {/* Display low stock items */}
       <DisplayLowStockItems items={inventory} />
