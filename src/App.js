@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import AddItem from './components/AddItem';
+import DisplayItems from './components/DisplayItems';
+import RemoveItem from './components/RemoveItem';
+import UpdateItem from './components/UpdateItem';
+import SearchItem from './components/SearchItem';
+import DisplayLowStockItems from './components/DisplayLowStockItems';
 
-function App() {
+const App = () => {
+  const [inventory, setInventory] = useState([]);
+
+  // Function to add an item to inventory
+  const handleAddItem = (newItem) => {
+    setInventory([...inventory, newItem]);
+  };
+
+  // Function to remove an item from inventory
+  const handleRemoveItem = (id) => {
+    setInventory(inventory.filter(item => item.id !== id));
+  };
+
+  // Function to update an item in inventory
+  const handleUpdateItem = (updatedItem) => {
+    setInventory(inventory.map(item => (item.id === updatedItem.id ? updatedItem : item)));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Inventory Management System</h1>
+
+      {/* Add item component */}
+      <AddItem onAddItem={handleAddItem} />
+
+      {/* Search item component */}
+      <SearchItem items={inventory} />
+
+      {/* Update item component */}
+      <UpdateItem items={inventory} onUpdateItem={handleUpdateItem} />
+
+      {/* Remove item component */}
+      <RemoveItem items={inventory} onRemoveItem={handleRemoveItem} />
+
+      {/* Display all items */}
+      <DisplayItems items={inventory} filterByCategory={true} />
+
+      {/* Display low stock items */}
+      <DisplayLowStockItems items={inventory} />
     </div>
   );
-}
+};
 
 export default App;
