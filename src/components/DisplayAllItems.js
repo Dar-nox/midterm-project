@@ -1,17 +1,14 @@
 import React from 'react';
-import './styles/DisplayLowStockItems.css';
+import './styles/DisplayAllItems.css';
 
-const DisplayLowStockItems = ({ items }) => {
-  // Filter items that have quantity 5 or below
-  const lowStockItems = items.filter(item => item.quantity <= 5);
-
+const DisplayAllItems = ({ items }) => {
   return (
-    <div className="display-low-stock-container">
-      <h2 className="display-low-stock-title">Low Stock Items</h2>
-      {lowStockItems.length === 0 ? (
-        <p>No low stock items available.</p>
+    <div className="display-all-items-container">
+      <h2 className="display-all-items-title">All Items</h2>
+      {items.length === 0 ? (
+        <p>No items available in the inventory.</p>
       ) : (
-        <table className="display-low-stock-table">
+        <table className="display-all-items-table">
           <thead>
             <tr>
               <th>ID</th>
@@ -22,7 +19,7 @@ const DisplayLowStockItems = ({ items }) => {
             </tr>
           </thead>
           <tbody>
-            {lowStockItems.map(item => (
+            {items.map(item => (
               <tr key={item.id}>
                 <td>{item.id}</td>
                 <td>{item.name}</td>
@@ -38,4 +35,4 @@ const DisplayLowStockItems = ({ items }) => {
   );
 };
 
-export default DisplayLowStockItems;
+export default DisplayAllItems;

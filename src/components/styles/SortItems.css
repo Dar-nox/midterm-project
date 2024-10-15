@@ -1,0 +1,93 @@
+/* Container for Sort Items */
+.sort-items-container {
+    background-color: #f1f1f1;
+    padding: 40px;
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sort-items-title {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    letter-spacing: 1.5px;
+  }
+  
+  /* Sort options styling */
+  .sort-options {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .sort-select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    transition: border-color 0.3s;
+  }
+  
+  .sort-select:focus {
+    border-color: #555;
+  }
+  
+  .sort-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .sort-button:hover {
+    background-color: #555;
+  }
+  
+  /* Table styling */
+  .sort-items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .sort-items-table th,
+  .sort-items-table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+  }
+  
+  /* Header styling */
+  .sort-items-table th {
+    background-color: #333;
+    color: white;
+  }
+  
+  /* Alternating row colors: full white first, then light gray */
+  .sort-items-table tbody tr:nth-child(odd) {
+    background-color: rgb(255, 255, 255); /* White for odd rows */
+  }
+  
+  .sort-items-table tbody tr:nth-child(even) {
+    background-color: #e6e6e6; /* Light gray for even rows */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .sort-items-container {
+      padding: 20px;
+    }
+  
+    .sort-select {
+      width: 150px; /* Adjust select width for smaller screens */
+    }
+  }
+  

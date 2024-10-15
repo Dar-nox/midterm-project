@@ -1,0 +1,80 @@
+/* Container for Display Items By Category */
+.display-items-container {
+  background-color: #f1f1f1;
+  padding: 40px;
+  max-width: 800px;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.display-items-title {
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+  letter-spacing: 1.5px;
+}
+
+/* Category selection styling */
+.category-select {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.category-select label {
+  margin-right: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.category-dropdown {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Table styling */
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.items-table th,
+.items-table td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+/* Header styling */
+.items-table th {
+  background-color: #333;
+  color: white;
+}
+
+/* Alternating row colors: full white first, then light gray */
+.items-table tbody tr:nth-child(odd) {
+  background-color: white; /* White for odd rows */
+}
+
+.items-table tbody tr:nth-child(even) {
+  background-color: #e6e6e6; /* Light gray for even rows */
+}
+
+/* No items found styling */
+.no-items {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .display-items-container {
+    padding: 20px;
+  }
+}

@@ -1,89 +1,79 @@
 import React, { useState } from 'react';
+import './styles/UpdateItem.css'; // Importing the CSS for UpdateItem
 
-const UpdateItem = ({ items, onUpdateItem }) => {
-  const [itemId, setItemId] = useState('');
-  const [fieldToUpdate, setFieldToUpdate] = useState('quantity'); // default to quantity
+const UpdateItem = ({ onUpdateItem, items }) => {
+  const [id, setId] = useState('');
+  const [updateField, setUpdateField] = useState('quantity');
   const [newValue, setNewValue] = useState('');
   const [message, setMessage] = useState('');
 
-  // Handle input changes
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    if (name === 'itemId') setItemId(value);
-    if (name === 'newValue') setNewValue(value);
-    if (name === 'fieldToUpdate') setFieldToUpdate(value);
-  };
-
-  // Handle update item
-  const handleSubmit = (e) => {
+  const handleUpdateItem = (e) => {
     e.preventDefault();
-
-    const itemToUpdate = items.find(item => item.id === itemId);
-
+    const itemToUpdate = items.find((item) => item.id === id);
+    
     if (!itemToUpdate) {
       setMessage('Item not found!');
       return;
     }
 
-    // Validation: new value must be a positive number
-    if (isNaN(newValue) || newValue <= 0) {
-      setMessage('New value must be a positive number!');
+    if (!newValue) {
+      setMessage('Please enter a new value');
       return;
     }
 
-    // Update logic based on selected field
-    const updatedItem = { ...itemToUpdate };
+    const oldValue = updateField === 'quantity' ? itemToUpdate.quantity : itemToUpdate.price;
+    
+    const updatedItem = {
+      ...itemToUpdate,
+      [updateField]: updateField === 'quantity' ? parseInt(newValue) : parseFloat(newValue),
+    };
 
-    if (fieldToUpdate === 'quantity') {
-      setMessage(`Quantity of item "${itemToUpdate.name}" updated from ${itemToUpdate.quantity} to ${newValue}`);
-      updatedItem.quantity = newValue;
-    } else if (fieldToUpdate === 'price') {
-      setMessage(`Price of item "${itemToUpdate.name}" updated from ${itemToUpdate.price} to ${newValue}`);
-      updatedItem.price = newValue;
-    }
-
-    // Call parent function to update the inventory
     onUpdateItem(updatedItem);
-
-    // Clear the form
-    setItemId('');
+    setMessage(`Item ${itemToUpdate.name} has been updated from ${oldValue} to ${newValue}`);
+    setId('');
     setNewValue('');
+    setUpdateField('quantity');
   };
 
   return (
-    <div>
-      <h2>Update Item</h2>
-      {message && <p>{message}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>ID: </label>
+    <div className="update-item-container">
+      <h2 className="update-item-title">Update Item</h2>
+      <form onSubmit={handleUpdateItem} className="update-item-form">
+        <div className="form-group">
+          <label htmlFor="id">Item ID:</label>
           <input
             type="text"
-            name="itemId"
-            value={itemId}
-            onChange={handleInputChange}
-            placeholder="Enter Item ID"
+            id="id"
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+            className="input-field"
           />
         </div>
-        <div>
-          <label>Field to Update: </label>
-          <select name="fieldToUpdate" value={fieldToUpdate} onChange={handleInputChange}>
+        <div className="form-group">
+          <label htmlFor="updateField">Update Field:</label>
+          <select
+            id="updateField"
+            value={updateField}
+            onChange={(e) => setUpdateField(e.target.value)}
+            className="input-field"
+          >
             <option value="quantity">Quantity</option>
             <option value="price">Price</option>
           </select>
         </div>
-        <div>
-          <label>New Value: </label>
+        <div className="form-group">
+          <label htmlFor="newValue">New Value:</label>
           <input
             type="number"
-            name="newValue"
+            id="newValue"
             value={newValue}
-            onChange={handleInputChange}
-            placeholder="Enter New Value"
+            onChange={(e) => setNewValue(e.target.value)}
+            className="input-field"
           />
         </div>
-        <button type="submit">Update Item</button>
+        <button type="submit" className="submit-btn">Update Item</button>
       </form>
+      {message && <p className="message">{message}</p>}
     </div>
   );
 };

@@ -1,114 +1,98 @@
 import React, { useState } from 'react';
+import './styles/AddItem.css';
 
 const AddItem = ({ onAddItem }) => {
-  // Form state for input fields
-  const [item, setItem] = useState({
-    id: '',
-    name: '',
-    quantity: '',
-    price: '',
-    category: 'Clothing', // Default category
-  });
+  const [id, setId] = useState('');
+  const [name, setName] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [price, setPrice] = useState('');
+  const [category, setCategory] = useState('Clothing');
+  const [message, setMessage] = useState('');
 
-  // Form validation state
-  const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-
-  // Handle input change
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setItem({ ...item, [name]: value });
-  };
-
-  // Form submit handler
-  const handleSubmit = (e) => {
+  const handleAddItem = (e) => {
     e.preventDefault();
-
-    // Validation: check for empty fields
-    if (!item.id || !item.name || !item.quantity || !item.price || !item.category) {
-      setError('All fields are required!');
-      setSuccessMessage('');
+    if (!id || !name || !quantity || !price || !category) {
+      setMessage('Please fill in all fields');
       return;
     }
 
-    // Validation: check if quantity and price are positive numbers
-    if (isNaN(item.quantity) || isNaN(item.price) || item.quantity <= 0 || item.price <= 0) {
-      setError('Quantity and Price must be positive numbers!');
-      setSuccessMessage('');
-      return;
-    }
+    const newItem = {
+      id,
+      name,
+      quantity: parseInt(quantity),
+      price: parseFloat(price),
+      category,
+    };
 
-    // Clear error and proceed to add item
-    setError('');
-    onAddItem(item); // Call the parent component's onAddItem function to update the inventory
-    setSuccessMessage('Item added successfully!');
-    
-    // Clear form
-    setItem({
-      id: '',
-      name: '',
-      quantity: '',
-      price: '',
-      category: 'Clothing',
-    });
+    onAddItem(newItem);
+    setMessage('Item added successfully!');
+    setId('');
+    setName('');
+    setQuantity('');
+    setPrice('');
+    setCategory('Clothing');
   };
 
   return (
-    <div>
-      <h2>Add Item</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>ID: </label>
+    <div className="add-item-container">
+      <h2 className="add-item-title">Add New Item</h2>
+      <form onSubmit={handleAddItem} className="add-item-form">
+        <div className="form-group">
+          <label htmlFor="id">Item ID:</label>
           <input
             type="text"
-            name="id"
-            value={item.id}
-            onChange={handleChange}
-            placeholder="Enter ID"
+            id="id"
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+            className="input-field"
           />
         </div>
-        <div>
-          <label>Name: </label>
+        <div className="form-group">
+          <label htmlFor="name">Item Name:</label>
           <input
             type="text"
-            name="name"
-            value={item.name}
-            onChange={handleChange}
-            placeholder="Enter Name"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="input-field"
           />
         </div>
-        <div>
-          <label>Quantity: </label>
+        <div className="form-group">
+          <label htmlFor="quantity">Quantity:</label>
           <input
             type="number"
-            name="quantity"
-            value={item.quantity}
-            onChange={handleChange}
-            placeholder="Enter Quantity"
+            id="quantity"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+            className="input-field"
           />
         </div>
-        <div>
-          <label>Price: </label>
+        <div className="form-group">
+          <label htmlFor="price">Price:</label>
           <input
             type="number"
-            name="price"
-            value={item.price}
-            onChange={handleChange}
-            placeholder="Enter Price"
+            id="price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            className="input-field"
           />
         </div>
-        <div>
-          <label>Category: </label>
-          <select name="category" value={item.category} onChange={handleChange}>
+        <div className="form-group">
+          <label htmlFor="category">Category:</label>
+          <select
+            id="category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="input-field"
+          >
             <option value="Clothing">Clothing</option>
             <option value="Electronics">Electronics</option>
             <option value="Entertainment">Entertainment</option>
           </select>
         </div>
-        <button type="submit">Add Item</button>
+        <button type="submit" className="submit-btn">Add Item</button>
       </form>
+      {message && <p className="message">{message}</p>}
     </div>
   );
 };

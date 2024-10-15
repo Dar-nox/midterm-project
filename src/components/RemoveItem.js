@@ -1,48 +1,42 @@
 import React, { useState } from 'react';
+import './styles/RemoveItem.css'; // Importing the CSS for RemoveItem
 
-const RemoveItem = ({ items, onRemoveItem }) => {
-  const [itemId, setItemId] = useState('');
+const RemoveItem = ({ onRemoveItem, items }) => {
+  const [id, setId] = useState('');
   const [message, setMessage] = useState('');
 
-  // Handle input change
-  const handleChange = (e) => {
-    setItemId(e.target.value);
-  };
-
-  // Handle remove item
-  const handleSubmit = (e) => {
+  const handleRemoveItem = (e) => {
     e.preventDefault();
+    const itemToRemove = items.find((item) => item.id === id);
 
-    // Find the item in the inventory
-    const itemToRemove = items.find(item => item.id === itemId);
-
-    if (itemToRemove) {
-      onRemoveItem(itemId); // Call the parent component's onRemoveItem function
-      setMessage(`Item "${itemToRemove.name}" has been removed from the inventory.`);
-    } else {
+    if (!itemToRemove) {
       setMessage('Item not found!');
+      return;
     }
 
-    // Clear the input field
-    setItemId('');
+    onRemoveItem(itemToRemove.id); // Use item ID to remove
+    setMessage(`Item ${itemToRemove.name} has been removed from the inventory.`);
+    setId(''); // Clear the input field
   };
 
   return (
-    <div>
-      <h2>Remove Item</h2>
-      {message && <p>{message}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>ID: </label>
+    <div className="remove-item-container">
+      <h2 className="remove-item-title">Remove Item</h2>
+      <form onSubmit={handleRemoveItem} className="remove-item-form">
+        <div className="form-group">
+          <label htmlFor="id">Item ID:</label>
           <input
             type="text"
-            value={itemId}
-            onChange={handleChange}
-            placeholder="Enter ID"
+            id="id"
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+            className="input-field"
+            placeholder="Enter Item ID"
           />
         </div>
-        <button type="submit">Remove Item</button>
+        <button type="submit" className="submit-btn">Remove Item</button>
       </form>
+      {message && <p className="message">{message}</p>}
     </div>
   );
 };

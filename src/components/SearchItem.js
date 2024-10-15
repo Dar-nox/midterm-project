@@ -1,60 +1,70 @@
 import React, { useState } from 'react';
+import './styles/SearchItem.css'; // Importing the CSS for SearchItem
 
 const SearchItem = ({ items }) => {
-  const [itemId, setItemId] = useState('');
-  const [foundItem, setFoundItem] = useState(null);
-  const [message, setMessage] = useState('');
+  const [searchId, setSearchId] = useState('');
+  const [searchedItem, setSearchedItem] = useState(null);
+  const [itemNotFound, setItemNotFound] = useState(false); // State to track if the item was found
 
-  // Handle input change
-  const handleInputChange = (e) => {
-    setItemId(e.target.value);
+  const handleSearch = () => {
+    const foundItem = items.find(item => item.id === searchId);
+    if (foundItem) {
+      setSearchedItem(foundItem);
+      setItemNotFound(false); // Reset the not found state
+    } else {
+      setSearchedItem(null);
+      setItemNotFound(true); // Set not found state
+    }
   };
 
-  // Handle search
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Find the item in the inventory by ID
-    const item = items.find(item => item.id === itemId);
-
-    if (item) {
-      setFoundItem(item);
-      setMessage('');
-    } else {
-      setFoundItem(null);
-      setMessage('Item not found!');
+  // Function to handle keydown events
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch(); // Call handleSearch when Enter key is pressed
     }
-
-    // Clear the input field after search
-    setItemId('');
   };
 
   return (
-    <div>
-      <h2>Search Item</h2>
-      {message && <p style={{ color: 'red' }}>{message}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>ID: </label>
-          <input
-            type="text"
-            value={itemId}
-            onChange={handleInputChange}
-            placeholder="Enter Item ID"
-          />
-        </div>
-        <button type="submit">Search</button>
-      </form>
+    <div className="search-item-container">
+      <h2 className="search-item-title">Search Item</h2>
+      <div className="search-input">
+        <label htmlFor="searchId">Enter Item ID:</label>
+        <input
+          type="text"
+          id="searchId"
+          value={searchId}
+          onChange={(e) => setSearchId(e.target.value)}
+          onKeyDown={handleKeyDown} // Add the onKeyDown event handler
+          className="search-input-field"
+        />
+        <button onClick={handleSearch} className="search-button">Search</button>
+      </div>
 
-      {foundItem && (
-        <div>
-          <h3>Item Found:</h3>
-          <p><strong>ID:</strong> {foundItem.id}</p>
-          <p><strong>Name:</strong> {foundItem.name}</p>
-          <p><strong>Quantity:</strong> {foundItem.quantity}</p>
-          <p><strong>Price:</strong> ${foundItem.price}</p>
-          <p><strong>Category:</strong> {foundItem.category}</p>
-        </div>
+      {searchedItem && (
+        <table className="item-details-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Category</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{searchedItem.id}</td>
+              <td>{searchedItem.name}</td>
+              <td>{searchedItem.quantity}</td>
+              <td>${searchedItem.price.toFixed(2)}</td>
+              <td>{searchedItem.category}</td>
+            </tr>
+          </tbody>
+        </table>
+      )}
+
+      {itemNotFound && searchId && (
+        <p className="item-not-found">Item not found!</p>
       )}
     </div>
   );

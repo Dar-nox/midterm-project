@@ -1,84 +1,66 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState } from 'react';
+import './styles/SortItems.css'; // Importing the CSS for SortItems
 
 const SortItems = ({ items }) => {
-  const [sortBy, setSortBy] = useState('quantity'); // Default sort by quantity
-  const [sortOrder, setSortOrder] = useState('ascending'); // Default to ascending order
-  const [sortedItems, setSortedItems] = useState([]); // State to store sorted items
+  const [sortBy, setSortBy] = useState('quantity');
+  const [order, setOrder] = useState('ascending');
+  const [sortedItems, setSortedItems] = useState([]);
 
-  // Function to handle sort logic, wrapped with useCallback
-  const sortInventoryItems = useCallback(() => {
-    const newSortedItems = [...items].sort((a, b) => {
-      if (sortBy === 'quantity') {
-        return sortOrder === 'ascending' ? a.quantity - b.quantity : b.quantity - a.quantity;
-      } else if (sortBy === 'price') {
-        return sortOrder === 'ascending' ? a.price - b.price : b.price - a.price;
+  const handleSort = () => {
+    const sortedArray = [...items].sort((a, b) => {
+      const key = sortBy === 'quantity' ? 'quantity' : 'price';
+      if (order === 'ascending') {
+        return a[key] - b[key];
+      } else {
+        return b[key] - a[key];
       }
-      return 0;
     });
-
-    setSortedItems(newSortedItems);
-  }, [items, sortBy, sortOrder]);
-
-  // UseEffect to run sorting logic whenever items, sortBy, or sortOrder changes
-  useEffect(() => {
-    sortInventoryItems();
-  }, [items, sortBy, sortOrder, sortInventoryItems]);
-
-  // Handle sort field change
-  const handleSortByChange = (e) => {
-    setSortBy(e.target.value);
-  };
-
-  // Handle sort order change
-  const handleSortOrderChange = (e) => {
-    setSortOrder(e.target.value);
+    setSortedItems(sortedArray);
   };
 
   return (
-    <div>
-      <h2>Sort Items</h2>
-
-      <div>
-        {/* Select sort field */}
-        <label>Sort by: </label>
-        <select value={sortBy} onChange={handleSortByChange}>
-          <option value="quantity">Quantity</option>
-          <option value="price">Price</option>
+    <div className="sort-items-container">
+      <h2 className="sort-items-title">Sort Items</h2>
+      <div className="sort-options">
+        <select
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+          className="sort-select"
+        >
+          <option value="quantity">Sort by Quantity</option>
+          <option value="price">Sort by Price</option>
         </select>
-
-        {/* Select sort order */}
-        <label> Order: </label>
-        <select value={sortOrder} onChange={handleSortOrderChange}>
+        <select
+          value={order}
+          onChange={(e) => setOrder(e.target.value)}
+          className="sort-select"
+        >
           <option value="ascending">Ascending</option>
           <option value="descending">Descending</option>
         </select>
+        <button onClick={handleSort} className="sort-button">Sort</button>
       </div>
 
-      {/* Display sorted items in a table */}
-      {sortedItems.length > 0 ? (
-        <table border="1">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Quantity</th>
-              <th>Price</th>
+      <table className="sort-items-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sortedItems.map((item) => (
+            <tr key={item.id}>
+              <td>{item.id}</td>
+              <td>{item.name}</td>
+              <td>{item.quantity}</td>
+              <td>${item.price.toFixed(2)}</td>
             </tr>
-          </thead>
-          <tbody>
-            {sortedItems.map(item => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.name}</td>
-                <td>{item.quantity}</td>
-                <td>${item.price}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <p>No items available to display.</p>
-      )}
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
