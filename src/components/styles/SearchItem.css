@@ -1,4 +1,4 @@
-/* Container for Search Item */
+
 .search-item-container {
     background-color: #f1f1f1;
     padding: 40px;
@@ -15,8 +15,7 @@
     margin-bottom: 20px;
     letter-spacing: 1.5px;
   }
-  
-  /* Search input styling */
+
   .search-input {
     display: flex;
     justify-content: center;
@@ -36,8 +35,7 @@
     border: 1px solid #ccc;
     margin-right: 10px;
   }
-  
-  /* Button styling */
+
   .search-button {
     padding: 8px 12px;
     border: none;
@@ -50,14 +48,13 @@
   .search-button:hover {
     background-color: #555;
   }
-  
-  /* Table styling */
+
   .item-details-table {
     width: 100%;
-    max-width: 800px; /* Set a maximum width for the table */
+    max-width: 800px;
     border-collapse: collapse;
     margin-top: 20px;
-    table-layout: fixed; /* Fixed layout to ensure static dimensions */
+    table-layout: fixed;
   }
   
   .item-details-table th,
@@ -65,32 +62,28 @@
     padding: 10px;
     text-align: left;
     border: 1px solid #ddd;
-    overflow: hidden; /* Prevent overflow in cells */
+    overflow: hidden;
   }
-  
-  /* Header styling */
+
   .item-details-table th {
     background-color: #333;
     color: white;
   }
-  
-  /* Alternating row colors */
+
   .item-details-table tbody tr:nth-child(odd) {
-    background-color: white; /* White for odd rows */
+    background-color: white;
   }
   
   .item-details-table tbody tr:nth-child(even) {
-    background-color: #e6e6e6; /* Light gray for even rows */
+    background-color: #e6e6e6;
   }
-  
-  /* Item not found styling */
+
   .item-not-found {
     color: #888;
     text-align: center;
     font-style: italic;
   }
   
-  /* Responsive Design */
   @media (max-width: 768px) {
     .search-item-container {
       padding: 20px;

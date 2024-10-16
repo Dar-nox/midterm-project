@@ -1,4 +1,4 @@
-/* Container for Remove Item form */
+
 .remove-item-container {
     background-color: #f1f1f1;
     padding: 40px;
@@ -15,8 +15,7 @@
     margin-bottom: 20px;
     letter-spacing: 1.5px;
   }
-  
-  /* Form styling */
+
   .remove-item-form {
     display: flex;
     flex-direction: column;
@@ -46,8 +45,7 @@
   .input-field:focus {
     border-color: #555;
   }
-  
-  /* Submit Button */
+
   .submit-btn {
     background-color: #333;
     color: white;
@@ -63,16 +61,14 @@
     background-color: #555;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-  
-  /* Message Styling */
+
   .message {
     margin-top: 20px;
     color: #333;
     font-size: 14px;
     text-align: center;
   }
-  
-  /* Responsive Design */
+
   @media (max-width: 768px) {
     .remove-item-container {
       padding: 20px;

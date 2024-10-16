@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './styles/SortItems.css'; // Importing the CSS for SortItems
+import './styles/SortItems.css';
 
 const SortItems = ({ items }) => {
   const [sortBy, setSortBy] = useState('quantity');

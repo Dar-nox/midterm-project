@@ -7,7 +7,7 @@ import DisplayItemsByCategory from './DisplayItemsByCategory';
 import DisplayAllItems from './DisplayAllItems';
 import DisplayLowStockItems from './DisplayLowStockItems';
 import SortItems from './SortItems';
-import './styles/Navbar.css'; // Import the CSS file
+import './styles/Navbar.css';
 
 const Navbar = ({ inventory, onAddItem, onRemoveItem, onUpdateItem }) => {
   const [activeComponent, setActiveComponent] = useState('addItem');
@@ -20,10 +20,9 @@ const Navbar = ({ inventory, onAddItem, onRemoveItem, onUpdateItem }) => {
     <div>
       <nav className="navbar">
         <ul className="nav-list">
-          {/* Brand name */}
+
           <li className="nav-brand">WebDev IMS</li>
 
-          {/* Navigation links */}
           <li className="nav-item"><button className={`nav-link ${activeComponent === 'addItem' ? 'active' : ''}`} onClick={() => handleNavClick('addItem')}>Add Item</button></li>
           <li className="nav-item"><button className={`nav-link ${activeComponent === 'updateItem' ? 'active' : ''}`} onClick={() => handleNavClick('updateItem')}>Update Item</button></li>
           <li className="nav-item"><button className={`nav-link ${activeComponent === 'removeItem' ? 'active' : ''}`} onClick={() => handleNavClick('removeItem')}>Remove Item</button></li>

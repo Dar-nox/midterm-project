@@ -1,4 +1,4 @@
-/* Container for Display Low Stock Items */
+
 .display-low-stock-container {
     background-color: #f1f1f1;
     padding: 40px;
@@ -15,8 +15,7 @@
     margin-bottom: 20px;
     letter-spacing: 1.5px;
   }
-  
-  /* Table styling */
+
   .display-low-stock-table {
     width: 100%;
     border-collapse: collapse;
@@ -29,23 +28,20 @@
     text-align: left;
     border: 1px solid #ddd;
   }
-  
-  /* Header styling */
+
   .display-low-stock-table th {
     background-color: #333;
     color: white;
   }
-  
-  /* Alternating row colors: full white first, then light gray */
+
   .display-low-stock-table tbody tr:nth-child(odd) {
-    background-color: white; /* White for odd rows */
+    background-color: white;
   }
   
   .display-low-stock-table tbody tr:nth-child(even) {
-    background-color: #e6e6e6; /* Light gray for even rows */
+    background-color: #e6e6e6;
   }
-  
-  /* Responsive Design */
+
   @media (max-width: 768px) {
     .display-low-stock-container {
       padding: 20px;

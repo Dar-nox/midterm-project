@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './styles/DisplayItemsByCategory.css'; // Importing the CSS for DisplayItemsByCategory
+import './styles/DisplayItemsByCategory.css';
 
 const DisplayItemsByCategory = ({ items }) => {
   const [selectedCategory, setSelectedCategory] = useState('Clothing');

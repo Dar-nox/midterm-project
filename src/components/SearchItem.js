@@ -1,26 +1,25 @@
 import React, { useState } from 'react';
-import './styles/SearchItem.css'; // Importing the CSS for SearchItem
+import './styles/SearchItem.css';
 
 const SearchItem = ({ items }) => {
   const [searchId, setSearchId] = useState('');
   const [searchedItem, setSearchedItem] = useState(null);
-  const [itemNotFound, setItemNotFound] = useState(false); // State to track if the item was found
+  const [itemNotFound, setItemNotFound] = useState(false);
 
   const handleSearch = () => {
     const foundItem = items.find(item => item.id === searchId);
     if (foundItem) {
       setSearchedItem(foundItem);
-      setItemNotFound(false); // Reset the not found state
+      setItemNotFound(false);
     } else {
       setSearchedItem(null);
-      setItemNotFound(true); // Set not found state
+      setItemNotFound(true);
     }
   };
 
-  // Function to handle keydown events
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
-      handleSearch(); // Call handleSearch when Enter key is pressed
+      handleSearch();
     }
   };
 
@@ -34,7 +33,7 @@ const SearchItem = ({ items }) => {
           id="searchId"
           value={searchId}
           onChange={(e) => setSearchId(e.target.value)}
-          onKeyDown={handleKeyDown} // Add the onKeyDown event handler
+          onKeyDown={handleKeyDown}
           className="search-input-field"
         />
         <button onClick={handleSearch} className="search-button">Search</button>

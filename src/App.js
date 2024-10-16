@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
-import './App.css'; // Import global styles if needed
+import './App.css';
 
 const App = () => {
   const [inventory, setInventory] = useState([]);

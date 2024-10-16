@@ -1,4 +1,4 @@
-/* Container for Display All Items */
+
 .display-all-items-container {
     background-color: #f1f1f1;
     padding: 40px;
@@ -15,8 +15,7 @@
     margin-bottom: 20px;
     letter-spacing: 1.5px;
   }
-  
-  /* Table styling */
+
   .display-all-items-table {
     width: 100%;
     border-collapse: collapse;
@@ -30,22 +29,19 @@
     border: 1px solid #ddd;
   }
   
-  /* Header styling */
   .display-all-items-table th {
     background-color: #333;
     color: white;
   }
-  
-  /* Alternating row colors: full white first, then light gray */
+
   .display-all-items-table tbody tr:nth-child(odd) {
-    background-color: white; /* White for odd rows */
+    background-color: white;
   }
   
   .display-all-items-table tbody tr:nth-child(even) {
-    background-color: #e6e6e6; /* Light gray for even rows */
+    background-color: #e6e6e6;
   }
-  
-  /* Responsive Design */
+
   @media (max-width: 768px) {
     .display-all-items-container {
       padding: 20px;

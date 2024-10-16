@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './styles/RemoveItem.css'; // Importing the CSS for RemoveItem
+import './styles/RemoveItem.css';
 
 const RemoveItem = ({ onRemoveItem, items }) => {
   const [id, setId] = useState('');
@@ -14,9 +14,9 @@ const RemoveItem = ({ onRemoveItem, items }) => {
       return;
     }
 
-    onRemoveItem(itemToRemove.id); // Use item ID to remove
+    onRemoveItem(itemToRemove.id);
     setMessage(`Item ${itemToRemove.name} has been removed from the inventory.`);
-    setId(''); // Clear the input field
+    setId('');
   };
 
   return (

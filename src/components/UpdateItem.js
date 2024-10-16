@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './styles/UpdateItem.css'; // Importing the CSS for UpdateItem
+import './styles/UpdateItem.css';
 
 const UpdateItem = ({ onUpdateItem, items }) => {
   const [id, setId] = useState('');

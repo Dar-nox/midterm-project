@@ -1,4 +1,4 @@
-/* Container for Add Item form */
+
 .add-item-container {
     background-color: #f1f1f1;
     padding: 40px;
@@ -16,7 +16,6 @@
     letter-spacing: 1.5px;
   }
   
-  /* Form styling */
   .add-item-form {
     display: flex;
     flex-direction: column;
@@ -47,7 +46,6 @@
     border-color: #555;
   }
   
-  /* Submit Button */
   .submit-btn {
     background-color: #333;
     color: white;
@@ -64,7 +62,6 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
-  /* Message Styling */
   .message {
     margin-top: 20px;
     color: #333;
@@ -72,7 +69,6 @@
     text-align: center;
   }
   
-  /* Responsive Design */
   @media (max-width: 768px) {
     .add-item-container {
       padding: 20px;

@@ -2,7 +2,7 @@ import React from 'react';
 import './styles/DisplayLowStockItems.css';
 
 const DisplayLowStockItems = ({ items }) => {
-  // Filter items that have quantity 5 or below
+
   const lowStockItems = items.filter(item => item.quantity <= 5);
 
   return (
